@@ -2,24 +2,40 @@ import "./styles.css";
 import React, { useState } from "react";
 
 export default function App() {
-  const [count, setCount] = useState(() => 0);
-  // const [flag, setFlag] = useState(false);
-  // const [value, setValue] = useState("");
+  const [user, setUser] = useState({ name: "", email: "" });
+  const [submitded, setSubmitted] = useState(false);
+  const [message, setMessage] = useState("");
 
-  // const updateCount = () => {
-  //   setCount(count + 1);
-  // };
+  const handleSubmit = (e) => {
+    if (user.name && user.email) {
+      setSubmitted(true);
+    }
+    setMessage("please enter value");
+    return;
+  };
 
-  // const handleChange = (e) => {
-  //   setFlag(true);
-  //   setValue(e.target.value);
-  // };
   return (
-    <>
-      <button onClick={() => setCount((x) => x + 1)}>++</button>
-      <button onClick={() => setCount(0)}> reset</button>
-      <button onClick={() => setCount((x) => x - 1)}>--</button>
-      {count}
-    </>
+    <form>
+      <input
+        type="text"
+        value={user.name}
+        onChange={(e) => setUser({ ...user, name: e.target.value })}
+      />{" "}
+      <br />
+      <br />
+      <input
+        type="email"
+        value={user.email}
+        onChange={(e) => setUser({ ...user, email: e.target.value })}
+      />
+      <br />
+      <br />
+      <button onCLick={handleSubmit}> submit </button>
+      <br />
+      <br />
+      {user.name}
+      {user.email}
+      {message}
+    </form>
   );
 }
